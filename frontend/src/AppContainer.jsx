@@ -2,6 +2,7 @@ import { GluestackUIProvider, SafeAreaView } from "@gluestack-ui/themed";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from 'expo-status-bar';
 import Acessar from './screens/Acesso/index';
+import TabNavigator from "./components/tabs";
 
 export default function AppContainer() {
     return (
@@ -12,6 +13,7 @@ export default function AppContainer() {
                     <Acessar />
                 </NavigationContainer>
             </SafeAreaView>
+            <TabNavigator />
         </GluestackUIProvider>
     )
 }
