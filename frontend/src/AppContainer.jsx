@@ -11,9 +11,9 @@ export default function AppContainer() {
                 <NavigationContainer>
                     <StatusBar style="auto" />
                     <Acessar />
+                    <TabNavigator />
                 </NavigationContainer>
             </SafeAreaView>
-            <TabNavigator />
         </GluestackUIProvider>
     )
 }
