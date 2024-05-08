@@ -8,7 +8,9 @@ import {
 import { Image } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
-export default function Acessar() {
+export default function Acessar(props) {
+  const {login} = props;
+  
   return (
     <Box flex={1} style={{ backgroundColor: "#F15156" }}>
       <Box flex={1} marginTop={55} marginLeft={15}>
@@ -36,6 +38,7 @@ export default function Acessar() {
       </Box>
       <Box flex={2} justifyContent="center" alignItems="center">
         <Button
+          onPress={() => login(true)}
           alignItems="center"
           justifyContent="center"
           style={{
