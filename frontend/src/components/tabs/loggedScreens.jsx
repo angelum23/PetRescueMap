@@ -8,8 +8,7 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = (props) => {    
-    const {logout} = props; //todo Angelo: criar context pra pegar o logout de dentro do componente conta
-
+    const {logout} = props; 
     const getOptions = (name, iconName) => ({
             title: name,
             tabBarIcon: ({color, size}) => <SimpleLineIcons name={iconName} size={size} color={color} />,
@@ -26,6 +25,7 @@ const TabNavigator = (props) => {
             <Tab.Screen
                 name="Conta"
                 component={Conta}
+                initialParams={{ logout }}
                 options={getOptions("Conta", "user")}
             />
             <Tab.Screen

@@ -3,7 +3,8 @@ import { GluestackUIProvider, SafeAreaView } from "@gluestack-ui/themed";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from 'expo-status-bar';
 import Acessar from './screens/Acesso/index';
-import TabNavigator from "./components/tabs";
+import TabNavigator from "./components/tabs/loggedScreens";
+import AnonScreens from './components/tabs/anonScreens';
 
 export default function AppContainer() {
     const [logado, setLogado] = React.useState();
@@ -15,7 +16,7 @@ export default function AppContainer() {
             <SafeAreaView flex={1} style={{ fontStyle: "Roboto_100Thin" }}>
                 <NavigationContainer>
                     <StatusBar style="auto" />
-                    {logado ? <TabNavigator /> : <Acessar login={login}/>}
+                    {logado ? <TabNavigator logout={logout} /> : <AnonScreens login={login} />}
                 </NavigationContainer>
             </SafeAreaView>
         </GluestackUIProvider>
