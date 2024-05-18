@@ -1,4 +1,5 @@
 import React from 'react'
+import { config } from '../config/gluestack-ui.config';
 import { GluestackUIProvider, SafeAreaView } from "@gluestack-ui/themed";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from 'expo-status-bar';
@@ -11,7 +12,7 @@ export default function AppContainer() {
     const logout = () => setLogado(false);
 
     return (
-        <GluestackUIProvider>
+        <GluestackUIProvider config={config}>
             <SafeAreaView flex={1} style={{ fontStyle: "Roboto_100Thin" }}>
                 <NavigationContainer>
                     <StatusBar style="auto" />
