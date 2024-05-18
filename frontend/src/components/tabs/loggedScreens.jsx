@@ -9,7 +9,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = (props) => {
-  const { logout } = props; //todo Angelo: criar context pra pegar o logout de dentro do componente conta
+  const {logout} = props;
 
   const getOptions = (name, iconName) => ({
     title: name,
@@ -38,7 +38,7 @@ const TabNavigator = (props) => {
       />
       <Tab.Screen
         name="Mapa"
-        component={Conta}
+        component={Mapa}
         options={getOptions("Mapa", "map-marker-circle")}
       />
       <Tab.Screen
@@ -48,7 +48,8 @@ const TabNavigator = (props) => {
       />
       <Tab.Screen
         name="Conta"
-        component={Mapa}
+        component={Conta}
+        initialParams={{ logout }}
         options={getOptions("Conta", "account")}
       />
     </Tab.Navigator>
