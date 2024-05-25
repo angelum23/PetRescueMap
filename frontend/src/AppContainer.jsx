@@ -1,11 +1,10 @@
-import React from 'react'
-import { config } from '../config/gluestack-ui.config';
 import { GluestackUIProvider, SafeAreaView } from "@gluestack-ui/themed";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from 'expo-status-bar';
-import Acessar from './screens/Acesso/index';
-import TabNavigator from "./components/tabs/loggedScreens";
+import React from 'react';
+import { config } from '../config/gluestack-ui.config';
 import AnonScreens from './components/tabs/anonScreens';
+import TabNavigator from "./components/tabs/loggedScreens";
 
 export default function AppContainer() {
     const [logado, setLogado] = React.useState();

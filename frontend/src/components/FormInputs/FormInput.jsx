@@ -16,10 +16,12 @@ const FormInput = ({
   isRequired,
   label,
   children,
-  erro
+  erro, 
+  w,
+  h
 }) => {
   return (
-    <Box h="$32" w="$72">
+    <Box h={h} w={w}>
       <FormControl
         size="md"
         isDisabled={isDisabled}
@@ -27,8 +29,8 @@ const FormInput = ({
         isReadOnly={isReadOnly}
         isRequired={isRequired}
       >
-        <FormControlLabel mb="$1" color="black" mr={5} color="$textDark800" size="xl" lineHeight="$xl" fontWeight="$semibold" maxFontSizeMultiplier={1.2}>
-          <FormControlLabelText>{label}</FormControlLabelText>
+        <FormControlLabel mb="$1" mr={5} size="xl" lineHeight="$xl" maxFontSizeMultiplier={1.2}>
+          <FormControlLabelText color="$textDark500">{label}</FormControlLabelText>
         </FormControlLabel>
         {children}
         <FormControlError>
