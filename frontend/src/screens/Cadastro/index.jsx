@@ -1,70 +1,164 @@
-import React, { useState } from "react";
-import { Box, Button, ButtonText, Text } from "@gluestack-ui/themed";
-import { ActivityIndicator, Image, TextInput } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { firebase_auth } from "../../components/firebase/firebaseConfig";
 import { createUserWithEmailAndPassword } from "@firebase/auth";
+import { Box, Button, ButtonText, ScrollView } from "@gluestack-ui/themed";
+import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
+import { ActivityIndicator, TextInput } from "react-native";
+import MaskInput from "react-native-mask-input";
+import InputImage from "../../components/FormInputs/InputImage";
+import { firebase_auth } from "../../components/firebase/firebaseConfig";
 
 const SignUpPage = () => {
-    const navigation = useNavigation();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-    const auth = firebase_auth;
+  const navigation = useNavigation();
+  const [nome, setNome] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const auth = firebase_auth;
 
-    const signUp = async () => {
-        setLoading(true);
-        try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            navigation.navigate("Login");
-        } catch (error) {
-            console.log("Sign Up Error:", error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+  const signUp = async () => {
+    setLoading(true);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigation.navigate("Login");
+    } catch (error) {
+      console.log("Sign Up Error:", error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    return (
-        <Box flex={1} style={{ backgroundColor: "#F15156", alignItems: "center" }}>
-            <Image source={require("../../../assets/icon.png")} style={{ width: 80, height: 80, marginTop: 50 }} />
-            <Text style={{ textTransform: "uppercase", color: "white", marginTop: 15, fontWeight: "600" }}>
-                Pet Rescue App
-            </Text>
-            <TextInput
-                value={email}
-                placeholder="Email"
-                autoCapitalize="none"
-                onChangeText={(text) => setEmail(text)}
-                style={{ backgroundColor: 'white', padding: 10, marginVertical: 5, width: '80%' }}
-            />
-            <TextInput
-                value={password}
-                secureTextEntry={true}
-                placeholder="Senha"
-                autoCapitalize="none"
-                onChangeText={(text) => setPassword(text)}
-                style={{ backgroundColor: 'white', padding: 10, marginVertical: 5, width: '80%' }}
-            />
-            {loading && <ActivityIndicator size="large" color="#0000ff" />}
-            <Button
-                onPress={signUp}
-                alignItems="center"
-                justifyContent="center"
-                style={{
-                    backgroundColor: "#2D384C",
-                    padding: 10,
-                    borderRadius: 50,
-                    width: 200,
-                    height: 50,
-                    marginVertical: 20,
-                }}
-            >
-                <ButtonText color="white" fontSize={16} fontWeight="600">
-                    Cadastrar
-                </ButtonText>
-            </Button>
+  return (
+    <Box
+      flex={1}
+      style={{ backgroundColor: "#F15156" }}
+      justifyContent="center"
+      pt={30}
+    >
+      <ScrollView>
+        <Box flex={4} w="100%" alignItems="center" justifyContent="center">
+          <TextInput
+            value={nome}
+            placeholder="Nome"
+            placeholderTextColor="#F15156"
+            autoCapitalize="none"
+            onChangeText={(text) => setNome(text)}
+            style={{
+              padding: 10,
+              marginVertical: 5,
+              width: "80%",
+              borderColor: "white",
+              borderWidth: 1,
+              borderRadius: 18,
+              backgroundColor: "white",
+              color: "#F15156",
+            }}
+          />
+          <MaskInput
+            value={phone}
+            placeholder="Telefone"
+            placeholderTextColor="#F15156"
+            autoCapitalize="none"
+            onChangeText={(masked, unmasked) => {
+              setPhone(unmasked);
+            }}
+            style={{
+              padding: 10,
+              marginVertical: 5,
+              width: "80%",
+              borderColor: "white",
+              borderWidth: 1,
+              borderRadius: 18,
+              backgroundColor: "white",
+              color: "#F15156",
+            }}
+            mask={[
+              "(",
+              /\d/,
+              /\d/,
+              ")",
+              " ",
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+              "-",
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+            ]}
+          />
+          <TextInput
+            value={email}
+            placeholder="Email"
+            placeholderTextColor="#F15156"
+            autoCapitalize="none"
+            onChangeText={(text) => setEmail(text)}
+            style={{
+              padding: 10,
+              marginVertical: 5,
+              width: "80%",
+              borderColor: "white",
+              borderWidth: 1,
+              borderRadius: 18,
+              backgroundColor: "white",
+              color: "#F15156",
+            }}
+          />
+          <TextInput
+            value={password}
+            secureTextEntry={true}
+            placeholder="Senha"
+            placeholderTextColor="#F15156"
+            autoCapitalize="none"
+            onChangeText={(text) => setPassword(text)}
+            style={{
+              padding: 10,
+              marginVertical: 5,
+              width: "80%",
+              borderColor: "white",
+              borderWidth: 1,
+              borderRadius: 18,
+              backgroundColor: "white",
+              color: "#F15156",
+            }}
+          />
+          <InputImage
+            w={"80%"}
+            h={300}
+            onPickImage={(value) => setImage(value)}
+            imageValue={image}
+            borderColor="white"
+          />
         </Box>
-    );
+        <Box flex={1} mt={50}>
+          <ActivityIndicator size="large" color={loading ? "white" : "#F15156"} />
+        </Box>
+        <Box flex={1} alignItems="center" mt={20}>
+          <Button
+            onPress={signUp}
+            alignItems="center"
+            justifyContent="center"
+            style={{
+              backgroundColor: "#2D384C",
+              padding: 10,
+              borderRadius: 18,
+              width: 150,
+              height: 50,
+              marginVertical: 5,
+            }}
+          >
+            <ButtonText color="white" fontSize={16} fontWeight="600">
+              Cadastrar
+            </ButtonText>
+          </Button>
+        </Box>
+      </ScrollView>
+    </Box>
+  );
 };
 
 export default SignUpPage;
