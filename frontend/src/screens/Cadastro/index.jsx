@@ -41,7 +41,6 @@ const SignUpPage = () => {
           <TextInput
             value={nome}
             placeholder="Nome"
-            placeholderTextColor="#F15156"
             autoCapitalize="none"
             onChangeText={(text) => setNome(text)}
             style={{
@@ -52,13 +51,11 @@ const SignUpPage = () => {
               borderWidth: 1,
               borderRadius: 18,
               backgroundColor: "white",
-              color: "#F15156",
             }}
           />
           <MaskInput
             value={phone}
-            placeholder="Telefone"
-            placeholderTextColor="#F15156"
+            placeholder="Telefone (somente números)"
             autoCapitalize="none"
             onChangeText={(masked, unmasked) => {
               setPhone(unmasked);
@@ -71,7 +68,6 @@ const SignUpPage = () => {
               borderWidth: 1,
               borderRadius: 18,
               backgroundColor: "white",
-              color: "#F15156",
             }}
             mask={[
               "(",
@@ -94,7 +90,6 @@ const SignUpPage = () => {
           <TextInput
             value={email}
             placeholder="Email"
-            placeholderTextColor="#F15156"
             autoCapitalize="none"
             onChangeText={(text) => setEmail(text)}
             style={{
@@ -105,14 +100,12 @@ const SignUpPage = () => {
               borderWidth: 1,
               borderRadius: 18,
               backgroundColor: "white",
-              color: "#F15156",
             }}
           />
           <TextInput
             value={password}
             secureTextEntry={true}
             placeholder="Senha"
-            placeholderTextColor="#F15156"
             autoCapitalize="none"
             onChangeText={(text) => setPassword(text)}
             style={{
@@ -123,7 +116,6 @@ const SignUpPage = () => {
               borderWidth: 1,
               borderRadius: 18,
               backgroundColor: "white",
-              color: "#F15156",
             }}
           />
           <InputImage

@@ -50,7 +50,7 @@ export default function Acessar() {
       style={{ backgroundColor: "#F15156" }}
       justifyContent="center"
     >
-      <Box flex={5} justifyContent="center" alignItems="center">
+      <Box flex={4} justifyContent="center" alignItems="center">
         <Image
           source={require("../../../assets/icon.png")}
           style={{ width: 80, height: 80 }}
@@ -66,11 +66,10 @@ export default function Acessar() {
           pet rescue app
         </Text>
       </Box>
-      <Box flex={3} justifyContent="center" alignItems="center">
+      <Box flex={2} justifyContent="center" alignItems="center">
         <TextInput
           value={email}
           placeholder="Email"
-          placeholderTextColor="#F15156"
           autoCapitalize="none"
           onChangeText={(text) => setEmail(text)}
           style={{
@@ -81,7 +80,6 @@ export default function Acessar() {
             borderWidth: 1,
             borderRadius: 18,
             backgroundColor: "white",
-            color: "#F15156",
           }}
         />
         <View
@@ -101,10 +99,9 @@ export default function Acessar() {
             value={password}
             secureTextEntry={!showPassword}
             placeholder="Senha"
-            placeholderTextColor="#F15156"
             autoCapitalize="none"
             onChangeText={(text) => setPassword(text)}
-            style={{ flex: 1, color: "#F15156" }}
+            style={{ flex: 1 }}
           />
           <TouchableOpacity onPress={handlePasswordVisibility}>
             {showPassword ? (
