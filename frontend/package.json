@@ -21,6 +21,7 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
     "@types/react": "~18.2.45",
+    "@types/geojson": "7946.0.14",
     "expo": "~50.0.17",
     "expo-font": "~11.10.3",
     "expo-image-picker": "~14.7.1",
@@ -33,7 +34,9 @@
     "react-native-gesture-handler": "~2.14.0",
     "react-native-mask-input": "^1.2.3",
     "react-native-safe-area-context": "^4.8.2",
-    "react-native-svg": "^14.1.0"
+    "react-native-svg": "^14.1.0",
+    "react-native-maps" :"1.15.4",
+    "expo-image-picker": "~14.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
