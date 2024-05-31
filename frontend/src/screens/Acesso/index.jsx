@@ -1,10 +1,22 @@
-import React, { useState } from "react";
-import { Box, Button, ButtonText, EyeOffIcon, Text } from "@gluestack-ui/themed";
-import { ActivityIndicator, Image, TextInput, View, TouchableOpacity } from "react-native";
-import { useRoute, useNavigation } from "@react-navigation/native";
-import { firebase_auth } from "../../components/firebase/firebaseConfig";
-import { EyeIcon } from "lucide-react-native";
 import { signInWithEmailAndPassword } from "@firebase/auth";
+import {
+  Box,
+  Button,
+  ButtonText,
+  EyeOffIcon,
+  Text,
+} from "@gluestack-ui/themed";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { EyeIcon } from "lucide-react-native";
+import React, { useState } from "react";
+import {
+  ActivityIndicator,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { firebase_auth } from "../../components/firebase/firebaseConfig";
 
 export default function Acessar() {
   const route = useRoute();
@@ -40,8 +52,12 @@ export default function Acessar() {
   };
 
   return (
-    <Box flex={1} style={{ backgroundColor: "#F15156" }}>
-      <Box flex={5} justifyContent="center" alignItems="center">
+    <Box
+      flex={1}
+      style={{ backgroundColor: "#F15156" }}
+      justifyContent="center"
+    >
+      <Box flex={4} justifyContent="center" alignItems="center">
         <Image
           source={require("../../../assets/icon.png")}
           style={{ width: 80, height: 80 }}
@@ -57,15 +73,35 @@ export default function Acessar() {
           pet rescue app
         </Text>
       </Box>
-      <Box flex={3} justifyContent="center" alignItems="center">
+      <Box flex={2} justifyContent="center" alignItems="center">
         <TextInput
           value={email}
           placeholder="Email"
           autoCapitalize="none"
           onChangeText={(text) => setEmail(text)}
-          style={{ backgroundColor: 'white', padding: 10, marginVertical: 5, width: '80%' }}
+          style={{
+            padding: 10,
+            marginVertical: 5,
+            width: "80%",
+            borderColor: "white",
+            borderWidth: 1,
+            borderRadius: 18,
+            backgroundColor: "white",
+          }}
         />
-        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 10, marginVertical: 5, width: '80%' }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            padding: 10,
+            marginVertical: 5,
+            width: "80%",
+            borderColor: "white",
+            borderWidth: 1,
+            borderRadius: 18,
+            backgroundColor: "white",
+          }}
+        >
           <TextInput
             value={password}
             secureTextEntry={!showPassword}
@@ -75,10 +111,14 @@ export default function Acessar() {
             style={{ flex: 1 }}
           />
           <TouchableOpacity onPress={handlePasswordVisibility}>
-            {showPassword ? <EyeOffIcon size={24} /> : <EyeIcon size={24} />}
+            {showPassword ? (
+              <EyeOffIcon w="24" h="24" color="#F15156" />
+            ) : (
+              <EyeIcon color="#F15156" />
+            )}
           </TouchableOpacity>
         </View>
-        {loading && <ActivityIndicator size="large" color="#0000ff" />}
+        {loading && <ActivityIndicator size="large" color="white" />}
       </Box>
       <Box flex={2} justifyContent="center" alignItems="center">
         <Button
@@ -88,8 +128,8 @@ export default function Acessar() {
           style={{
             backgroundColor: "#2D384C",
             padding: 10,
-            borderRadius: 50,
-            width: 200,
+            borderRadius: 18,
+            width: 150,
             height: 50,
             marginVertical: 5,
           }}
@@ -105,8 +145,8 @@ export default function Acessar() {
           style={{
             backgroundColor: "#2D384C",
             padding: 10,
-            borderRadius: 50,
-            width: 200,
+            borderRadius: 18,
+            width: 150,
             height: 50,
             marginVertical: 5,
           }}

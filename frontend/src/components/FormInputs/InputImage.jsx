@@ -4,6 +4,7 @@ import {
   HStack,
   AddIcon,
   Image,
+  ButtonIcon
 } from "@gluestack-ui/themed";
 import { Button } from "../Buttons/Button";
 import FormInput from "./FormInput";
@@ -19,6 +20,7 @@ const InputImage = ({
   isInvalid,
   isReadOnly,
   isRequired,
+  borderColor = null,
   w,
   h
 }) => {
@@ -51,7 +53,7 @@ const InputImage = ({
         mb={5}
         h={h}
         borderWidth={2}
-        borderColor={"$trueGray200"}
+        borderColor={borderColor != null ? borderColor : "$trueGray200"}
         rounded={"$xl"}
       >
         {imageValue ? (
@@ -66,7 +68,7 @@ const InputImage = ({
           <MaterialCommunityIcons
             name={"tooltip-image-outline"}
             size={80}
-            color={"#B1B1B1"}
+            color={borderColor != null ? borderColor : "#B1B1B1"}
           />
         )}
 
@@ -78,9 +80,10 @@ const InputImage = ({
               py={8}
               maxHeight={45}
               variant={"outline"}
-              action={"secondary"}
+              action={borderColor != null ? "default" : "secondary"}
               flex={1}
               icon={TrashIcon}
+              borderColor={borderColor != null ? borderColor : ""}
               onPress={() => onPickImage(null)}
             />
           ) : (
@@ -90,9 +93,10 @@ const InputImage = ({
               py={8}
               maxHeight={45}
               variant={"outline"}
-              action={"secondary"}
-              icon={AddIcon}
+              borderColor={borderColor != null ? borderColor : "$trueGray400"}
               onPress={pickImage}
+              action={borderColor != null ? "default" : "secondary"}
+              icon={AddIcon}
             />
           )}
         </HStack>
