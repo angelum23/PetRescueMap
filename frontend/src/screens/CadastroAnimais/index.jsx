@@ -10,11 +10,18 @@ import {
   Button,
   ButtonText,
   ScrollView,
+  useToast,
 } from "@gluestack-ui/themed";
 import InputText from "../../components/FormInputs/InputText";
 import InputImage from "../../components/FormInputs/InputImage";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
+import {
+  collection,
+  addDoc,
+  doc
+} from 'firebase/firestore';
+import { firebase_db } from "../../components/firebase/firebaseConfig";
 
 const CadastrarAnimais = () => {
   const [dadosEdicao, setDadosEdicao] = useState({});
@@ -26,15 +33,41 @@ const CadastrarAnimais = () => {
     descricao: dadosEdicao?.descricao || null,
     imagem: dadosEdicao?.imagem || null,
   });
+  const toast = useToast();
+
   const handleChangeInputValues = (fieldName, value) => {
     setInputValues({
       ...inputValues,
       [fieldName]: value,
     });
   };
-  function salvarAnimal() {
-    console.log("inputValus ", inputValues);
-  }
+
+  const resetForm = () => {
+    setInputValues({
+      nomeAnimal: "",
+      idade: "",
+      raca: "",
+      genero: "",
+      descricao: "",
+      imagem: "",
+    });
+  };
+
+  const salvarAnimal = async () => {
+    try {
+      const docRef = await addDoc(collection(firebase_db, "animais"), inputValues);
+      console.log("Document written with ID: ", docRef.id);
+      toast.show({
+        description: "Salvo com sucesso!",
+      });
+      resetForm();
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      toast.show({
+        description: "Erro ao salvar!",
+      });
+    }
+  };
 
   return (
     <Box flex={1} justifyContent="flex-start" m={10}>

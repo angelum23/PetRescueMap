@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const firebaseConfig = {
   apiKey: "AIzaSyBsWouPvo3DmSobqCLLmGTZUjKWEKJ1E0c",
   authDomain: "petrescuemap-94dba.firebaseapp.com",
+  databaseURL: "https://petrescuemap-94dba-default-rtdb.firebaseio.com",
   projectId: "petrescuemap-94dba",
   storageBucket: "petrescuemap-94dba.appspot.com",
   messagingSenderId: "730810895791",
