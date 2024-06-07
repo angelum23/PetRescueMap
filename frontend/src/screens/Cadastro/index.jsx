@@ -48,12 +48,13 @@ const SignUpPage = () => {
           />
           <MaskInput
             value={phone}
-            placeholder="Telefone (somente números)"
+            placeholder="Telefone"
             placeholderTextColor={"white"}
             autoCapitalize="none"
             onChangeText={(masked, unmasked) => {
               setPhone(unmasked);
             }}
+            keyboardType="numeric"
             style={{
               padding: 10,
               width: "80%",
@@ -125,7 +126,7 @@ const SignUpPage = () => {
             style={{
               backgroundColor: "#2D384C",
               padding: 10,
-              borderRadius: 18,
+              borderRadius: 50,
               width: 150,
               height: 50,
               marginVertical: 5,

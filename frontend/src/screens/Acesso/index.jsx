@@ -121,7 +121,7 @@ export default function Acessar() {
           style={{
             backgroundColor: "#2D384C",
             padding: 10,
-            borderRadius: 18,
+            borderRadius: 50,
             width: 150,
             height: 50,
             marginVertical: 5,
@@ -138,7 +138,7 @@ export default function Acessar() {
           style={{
             backgroundColor: "#2D384C",
             padding: 10,
-            borderRadius: 18,
+            borderRadius: 50,
             width: 150,
             height: 50,
             marginVertical: 5,
