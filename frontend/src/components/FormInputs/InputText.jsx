@@ -11,6 +11,7 @@ const InputText = ({
   placeholder,
   color,
   inputOnChange,
+  value,
   w,
   h
 }) => {
@@ -26,7 +27,7 @@ const InputText = ({
       h={h}
     >
       <Input h={50} borderRadius={'$xl'} borderColor="$borderLight300">
-        <InputField type={'text'} style={{color: color}} placeholderTextColor={color} placeholder={placeholder} onChangeText={(v) => inputOnChange(v)}/>
+        <InputField type={'text'} style={{color: color}} placeholderTextColor={color} placeholder={placeholder} value={value} onChangeText={(v) => inputOnChange(v)}/>
       </Input>
     </FormInput>
   );
