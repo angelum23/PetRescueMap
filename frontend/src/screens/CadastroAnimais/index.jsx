@@ -8,9 +8,10 @@ import {
   RadioIcon,
   RadioLabel,
   Button,
-  ButtonText,
   ScrollView,
-  useToast,
+  ButtonText,
+  ButtonIcon,
+  useToast
 } from "@gluestack-ui/themed";
 import InputText from "../../components/FormInputs/InputText";
 import InputImage from "../../components/FormInputs/InputImage";
@@ -130,18 +131,36 @@ const CadastrarAnimais = () => {
           borderRadius={"$xl"}
           mb={12}
         >
-          <TextareaInput color="black" placeholder="Descrição" onChangeText={(value) => handleChangeInputValues("descricao", value)} />
+          <TextareaInput
+            color="black"
+            placeholder="Descrição"
+            onChangeText={(value) =>
+              handleChangeInputValues("descricao", value)
+            }
+          />
         </Textarea>
-        <InputImage label={"Imagem"} h={200} onPickImage={(value) => handleChangeInputValues('imagem', value)} imageValue={inputValues.imagem} />
+        <InputImage
+          label={"Imagem"}
+          h={200}
+          onPickImage={(value) => handleChangeInputValues("imagem", value)}
+          imageValue={inputValues.imagem}
+        />
         <Box mt={40} alignItems="center">
           <Button
-            size="md"
-            w={100}
-            borderRadius={"$xl"}
+            w={150}
+            h={50}
             variant="solid"
             backgroundColor={"#2D384C"}
             onPress={() => salvarAnimal()}
+            style={{ gap: 10, borderRadius: 50 }}
           >
+            <ButtonIcon>
+              <MaterialCommunityIcons
+                name="content-save-all"
+                size={16}
+                color="white"
+              />
+            </ButtonIcon>
             <ButtonText>Salvar</ButtonText>
           </Button>
         </Box>

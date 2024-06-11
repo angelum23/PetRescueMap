@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { ActivityIndicator, TextInput } from "react-native";
 import MaskInput from "react-native-mask-input";
 import InputImage from "../../components/FormInputs/InputImage";
+import InputText from "../../components/FormInputs/InputText";
 import { firebase_auth } from "../../components/firebase/firebaseConfig";
 
 const SignUpPage = () => {
@@ -37,37 +38,32 @@ const SignUpPage = () => {
       pt={30}
     >
       <ScrollView>
-        <Box flex={4} w="100%" alignItems="center" justifyContent="center">
-          <TextInput
-            value={nome}
-            placeholder="Nome"
-            autoCapitalize="none"
-            onChangeText={(text) => setNome(text)}
-            style={{
-              padding: 10,
-              marginVertical: 5,
-              width: "80%",
-              borderColor: "white",
-              borderWidth: 1,
-              borderRadius: 18,
-              backgroundColor: "white",
-            }}
+        <Box flex={4} w="100%" alignItems="center" justifyContent="center" style={{gap: 8}}>
+          <InputText
+            inputValue={nome}
+            placeholder={"Nome"}
+            color={"white"}
+            inputOnChange={(text) => setNome(text)}
+            w={"80%"}
           />
           <MaskInput
             value={phone}
-            placeholder="Telefone (somente números)"
+            placeholder="Telefone"
+            placeholderTextColor={"white"}
             autoCapitalize="none"
             onChangeText={(masked, unmasked) => {
               setPhone(unmasked);
             }}
+            keyboardType="numeric"
             style={{
               padding: 10,
-              marginVertical: 5,
               width: "80%",
-              borderColor: "white",
+              borderColor: "#d4d4d4",
               borderWidth: 1,
-              borderRadius: 18,
-              backgroundColor: "white",
+              borderRadius: 12,
+              marginBottom: -27,
+              fontSize: 16,
+              color: "white"
             }}
             mask={[
               "(",
@@ -87,35 +83,28 @@ const SignUpPage = () => {
               /\d/,
             ]}
           />
-          <TextInput
-            value={email}
-            placeholder="Email"
-            autoCapitalize="none"
-            onChangeText={(text) => setEmail(text)}
-            style={{
-              padding: 10,
-              marginVertical: 5,
-              width: "80%",
-              borderColor: "white",
-              borderWidth: 1,
-              borderRadius: 18,
-              backgroundColor: "white",
-            }}
+          <InputText
+            inputValue={email}
+            placeholder={"Email"}
+            inputOnChange={(text) => setEmail(text)}
+            color={"white"}
+            w={"80%"}
           />
           <TextInput
             value={password}
             secureTextEntry={true}
             placeholder="Senha"
+            placeholderTextColor={"white"}
             autoCapitalize="none"
             onChangeText={(text) => setPassword(text)}
             style={{
               padding: 10,
-              marginVertical: 5,
               width: "80%",
-              borderColor: "white",
+              borderColor: "#d4d4d4",
               borderWidth: 1,
-              borderRadius: 18,
-              backgroundColor: "white",
+              borderRadius: 12,
+              fontSize: 16, 
+              color: "white"
             }}
           />
           <InputImage
@@ -123,7 +112,7 @@ const SignUpPage = () => {
             h={300}
             onPickImage={(value) => setImage(value)}
             imageValue={image}
-            borderColor="white"
+            borderColor="#d4d4d4"
           />
         </Box>
         <Box flex={1} mt={50}>
@@ -137,7 +126,7 @@ const SignUpPage = () => {
             style={{
               backgroundColor: "#2D384C",
               padding: 10,
-              borderRadius: 18,
+              borderRadius: 50,
               width: 150,
               height: 50,
               marginVertical: 5,

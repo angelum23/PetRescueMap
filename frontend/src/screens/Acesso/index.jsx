@@ -16,6 +16,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import InputText from "../../components/FormInputs/InputText";
 import { firebase_auth } from "../../components/firebase/firebaseConfig";
 
 export default function Acessar() {
@@ -74,20 +75,12 @@ export default function Acessar() {
         </Text>
       </Box>
       <Box flex={2} justifyContent="center" alignItems="center">
-        <TextInput
-          value={email}
-          placeholder="Email"
-          autoCapitalize="none"
-          onChangeText={(text) => setEmail(text)}
-          style={{
-            padding: 10,
-            marginVertical: 5,
-            width: "80%",
-            borderColor: "white",
-            borderWidth: 1,
-            borderRadius: 18,
-            backgroundColor: "white",
-          }}
+        <InputText
+          inputValue={email}
+          placeholder={"Email"}
+          inputOnChange={(text) => setEmail(text)}
+          color={"white"}
+          w={"80%"}
         />
         <View
           style={{
@@ -96,29 +89,29 @@ export default function Acessar() {
             padding: 10,
             marginVertical: 5,
             width: "80%",
-            borderColor: "white",
+            borderColor: "#d4d4d4",
             borderWidth: 1,
-            borderRadius: 18,
-            backgroundColor: "white",
+            borderRadius: 12
           }}
         >
           <TextInput
             value={password}
             secureTextEntry={!showPassword}
             placeholder="Senha"
+            placeholderTextColor={"white"}
             autoCapitalize="none"
             onChangeText={(text) => setPassword(text)}
-            style={{ flex: 1 }}
+            style={{ flex: 1, fontSize: 16, color: "white" }}
           />
           <TouchableOpacity onPress={handlePasswordVisibility}>
             {showPassword ? (
-              <EyeOffIcon w="24" h="24" color="#F15156" />
+              <EyeOffIcon w="24" h="24" color="white" />
             ) : (
-              <EyeIcon color="#F15156" />
+              <EyeIcon color="white" />
             )}
           </TouchableOpacity>
         </View>
-        {loading && <ActivityIndicator size="large" color="white" />}
+        {loading && <ActivityIndicator size="large" color="#d4d4d4" />}
       </Box>
       <Box flex={2} justifyContent="center" alignItems="center">
         <Button
@@ -128,7 +121,7 @@ export default function Acessar() {
           style={{
             backgroundColor: "#2D384C",
             padding: 10,
-            borderRadius: 18,
+            borderRadius: 50,
             width: 150,
             height: 50,
             marginVertical: 5,
@@ -145,7 +138,7 @@ export default function Acessar() {
           style={{
             backgroundColor: "#2D384C",
             padding: 10,
-            borderRadius: 18,
+            borderRadius: 50,
             width: 150,
             height: 50,
             marginVertical: 5,
