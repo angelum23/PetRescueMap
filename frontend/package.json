@@ -39,7 +39,8 @@
     "react-native-svg": "15.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@types/react-native-snap-carousel": "^3.8.11"
   },
   "private": true
 }
