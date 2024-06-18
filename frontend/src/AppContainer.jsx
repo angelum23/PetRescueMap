@@ -6,6 +6,11 @@ import { config } from '../config/gluestack-ui.config';
 import AnonScreens from './components/tabs/anonScreens';
 import TabNavigator from "./components/tabs/loggedScreens";
 import Toast from "react-native-toast-message";
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+    'Non-serializable values were found in the navigation state',
+  ]);
 
 export default function AppContainer() {
     const [logado, setLogado] = React.useState();

@@ -68,8 +68,6 @@ const Conta = () => {
             <FormInput label="Telefone" w={"100%"}>
               <MaskInput
                 value={phone}
-                placeholder="Telefone"
-                placeholderTextColor={"white"}
                 autoCapitalize="none"
                 onChangeText={(masked, unmasked) => {
                   setPhone(unmasked);

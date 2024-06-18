@@ -31,12 +31,14 @@ const Mapa = () => {
 
         querySnapshot.forEach((doc) => {
             if(!doc || !doc.data()) return;
-
+            
             console.log("Document data:", doc.data());
         });
     }
 
-    React.useEffect(buscarAnimais, []);
+    React.useEffect(() => {
+        buscarAnimais;
+    }, []);
 
     return (
         <ScrollView flex={1}>
