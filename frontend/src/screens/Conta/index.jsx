@@ -14,7 +14,7 @@ import MaskInput from "react-native-mask-input";
 import FormInput from "../../components/FormInputs/FormInput";
 import InputImage from "../../components/FormInputs/InputImage";
 import React, { useEffect, useState } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, setDoc, updateDoc } from "firebase/firestore";
 import { firebase_db } from "../../components/firebase/firebaseConfig";
 
 const Conta = () => {
@@ -23,12 +23,24 @@ const Conta = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [phone, setPhone] = useState("");
+  const [id, setId] = useState(""); 
   const [nome, setNome] = useState("");
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function salvarAlteracoes() {
-    //todo salvar alterações
+  async function salvarAlteracoes() {
+    try {
+      const docRef = doc(firebase_db, "usuarios", id);
+      await updateDoc(docRef, {
+        nome: nome,
+        phone: phone,
+        password: senha,
+        image: image,
+      });
+      console.log("Document successfully updated!");
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
   }
 
   async function fetchData() {
@@ -40,6 +52,7 @@ const Conta = () => {
       return;
     }
     querySnapshot.forEach((doc) => {
+      setId(doc.id);
       setNome(doc.data().nome);
       setPhone(doc.data().phone);
       setSenha(doc.data().password);
@@ -62,7 +75,7 @@ const Conta = () => {
               inputValue={nome}
               label={"Nome"}
               value={nome}
-              inputOnChange={(text) => setEmail(text)}
+              inputOnChange={(text) => setNome(text)}
               w={"100%"}
             />
             <FormInput label="Telefone" w={"100%"}>
