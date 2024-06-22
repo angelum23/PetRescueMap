@@ -30,8 +30,8 @@ const SignUpPage = () => {
 
   const salvarUsuario = async () => {
     try {
+      setLoading(true);
       const docRef = await addDoc(collection(firebase_db, "usuarios"), inputValues);
-      console.log("Document written with ID: " + docRef.id);
       const showToast = () => {
         Toast.show({
           type: 'success',
@@ -49,6 +49,8 @@ const SignUpPage = () => {
         text1: 'Erro',
         text2: 'Erro ao cadastrar usuário! 😢'
       });
+    } finally {
+      setLoading(false);
     }
   };
 

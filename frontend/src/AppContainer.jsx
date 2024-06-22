@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { config } from '../config/gluestack-ui.config';
 import AnonScreens from './components/tabs/anonScreens';
-import TabNavigator from "./components/tabs/loggedScreens";
+import StackNavigator from "./components/tabs/loggedScreens";
 import Toast from "react-native-toast-message";
 import { LogBox } from 'react-native';
 
@@ -27,7 +27,7 @@ export default function AppContainer() {
                     <NavigationContainer>
                         <StatusBar style="auto" />
                         {logado && emailLogado != null
-                         ? <TabNavigator logout={logout} getEmail={getEmail} />
+                         ? <StackNavigator logout={logout} getEmail={getEmail} />
                           : <AnonScreens login={login} emailFunc={emailFunc} />}
                     </NavigationContainer>
                 </SafeAreaView>

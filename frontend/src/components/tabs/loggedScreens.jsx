@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Conta from "../../screens/Conta";
 import Home from "../../screens/Home";
 import Mapa from "../../screens/Mapa";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { createStackNavigator } from "@react-navigation/stack";
+import CadastrarAnimais from "../../screens/CadastroAnimais";
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = (props) => {
-  const { logout, getEmail } = props;
+const TabNavigator = ({ route }) => {
+  const { logout, getEmail } = route.params;
 
   const getOptions = (name, iconName) => ({
     title: name,
@@ -50,4 +52,16 @@ const TabNavigator = (props) => {
   );
 };
 
-export default TabNavigator;
+const StackNavigator = (props) => {
+  const stack = createStackNavigator();
+  const { logout, getEmail } = props;
+
+  return (
+    <stack.Navigator initialRouteName='Tabs' >
+      <stack.Screen name="Tabs" component={TabNavigator} initialParams={{ logout, getEmail }} options={{ headerShown: false }} />
+      <stack.Screen name="Cadastrar Animais" component={CadastrarAnimais} options={{headerTintColor: "#fff", headerStyle: {backgroundColor: "#F15156",}}} />
+    </stack.Navigator>
+  );
+};
+
+export default StackNavigator
