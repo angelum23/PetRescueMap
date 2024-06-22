@@ -9,7 +9,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = (props) => {
-  const {logout} = props;
+  const { logout } = props;
 
   const getOptions = (name, iconName) => ({
     title: name,
@@ -40,11 +40,6 @@ const TabNavigator = (props) => {
         name="Mapa"
         component={Mapa}
         options={getOptions("Mapa", "map-marker-circle")}
-      />
-      <Tab.Screen
-        name="Cadastrar Animal"
-        component={CadastroAnimais}
-        options={getOptions("Cadastrar Animal", "plus-circle-outline")}
       />
       <Tab.Screen
         name="Conta"
