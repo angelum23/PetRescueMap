@@ -3,13 +3,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Conta from "../../screens/Conta";
 import Home from "../../screens/Home";
 import Mapa from "../../screens/Mapa";
-import CadastroAnimais from "../../screens/CadastroAnimais";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = (props) => {
-  const { logout } = props;
+  const { logout, getEmail } = props;
 
   const getOptions = (name, iconName) => ({
     title: name,
@@ -44,7 +43,7 @@ const TabNavigator = (props) => {
       <Tab.Screen
         name="Conta"
         component={Conta}
-        initialParams={{ logout }}
+        initialParams={{ logout, getEmail }}
         options={getOptions("Conta", "account")}
       />
     </Tab.Navigator>

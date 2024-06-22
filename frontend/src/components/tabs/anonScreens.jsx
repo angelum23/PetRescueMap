@@ -6,7 +6,7 @@ import SignUpPage from "../../screens/Cadastro";
 const Stack = createStackNavigator();
 
 export default function AnonScreens(props) {
-  const { login } = props;
+  const { login, emailFunc } = props;
 
   return (
     <Stack.Navigator
@@ -22,7 +22,7 @@ export default function AnonScreens(props) {
       <Stack.Screen
         name="Login"
         component={Acessar}
-        initialParams={{ login }}
+        initialParams={{ login, emailFunc }}
         options={{ headerShown: false }}
       />
       <Stack.Screen

@@ -22,7 +22,7 @@ import { firebase_auth } from "../../components/firebase/firebaseConfig";
 export default function Acessar() {
   const route = useRoute();
   const navigation = useNavigation();
-  const { login } = route.params;
+  const { login, emailFunc } = route.params;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -40,6 +40,7 @@ export default function Acessar() {
       if(isSignInWithAdmin()) return login(true);
       
       await signInWithEmailAndPassword(auth, email, password);
+      emailFunc(email);
       login(true);
     } catch (error) {
       console.error(error);

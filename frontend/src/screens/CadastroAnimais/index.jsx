@@ -11,10 +11,12 @@ import {
   ScrollView,
   ButtonText,
   ButtonIcon,
-  useToast
+  set,
 } from "@gluestack-ui/themed";
 import InputText from "../../components/FormInputs/InputText";
 import InputImage from "../../components/FormInputs/InputImage";
+import MapView, { Marker } from 'react-native-maps';
+import MapHook from "../Mapa/mapHook"
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import {
@@ -23,9 +25,12 @@ import {
   doc
 } from 'firebase/firestore';
 import { firebase_db } from "../../components/firebase/firebaseConfig";
+import Toast from 'react-native-toast-message';
 
 const CadastrarAnimais = () => {
   const [dadosEdicao, setDadosEdicao] = useState({});
+  const [position, setPosition] = useState({});
+  const [marker, setMarker] = useState(null);
   const [inputValues, setInputValues] = useState({
     nomeAnimal: dadosEdicao?.nomeAnimal || null,
     idade: dadosEdicao?.idade || null,
@@ -34,7 +39,6 @@ const CadastrarAnimais = () => {
     descricao: dadosEdicao?.descricao || null,
     imagem: dadosEdicao?.imagem || null,
   });
-  const toast = useToast();
 
   const handleChangeInputValues = (fieldName, value) => {
     setInputValues({
@@ -43,29 +47,41 @@ const CadastrarAnimais = () => {
     });
   };
 
+  const {handleRegionChange, region} = MapHook();
+
+  const handleClickMap = (coordinate) => { //todo: Nao ta caindo aqui ao clicar no mapa
+    setPosition(coordinate)
+    setMarker({
+      coordinate: coordinate,
+      title: "Novo Marcador",
+      description: "Descrição do novo marcador"
+    })
+  }
+
   const resetForm = () => {
-    setInputValues({
-      nomeAnimal: "",
-      idade: "",
-      raca: "",
-      genero: "",
-      descricao: "",
-      imagem: "",
-    });
+    //Todo - limpar formulário
+    console.log("Formulário resetado!");
   };
 
   const salvarAnimal = async () => {
     try {
       const docRef = await addDoc(collection(firebase_db, "animais"), inputValues);
       console.log("Document written with ID: ", docRef.id);
-      toast.show({
-        description: "Salvo com sucesso!",
-      });
+      const showToast = () => {
+        Toast.show({
+          type: 'success',
+          text1: 'Sucesso',
+          text2: 'Animal cadastrado com sucesso! 🚀'
+        });
+      }
+      showToast();
       resetForm();
     } catch (e) {
       console.error("Error adding document: ", e);
-      toast.show({
-        description: "Erro ao salvar!",
+      Toast.show({
+        type: 'error',
+        text1: 'Erro',
+        text2: 'Erro em cadastrar o animal! 😢'
       });
     }
   };
@@ -145,6 +161,13 @@ const CadastrarAnimais = () => {
           onPickImage={(value) => handleChangeInputValues("imagem", value)}
           imageValue={inputValues.imagem}
         />
+        <MapView style={{marginTop: 50, height: 200}} onPress={(e) => {handleClickMap(e.nativeEvent.coordinate)}} region={region} onRegionChangeComplete={handleRegionChange}>
+          {!!marker && <Marker
+                        coordinate={marker.coordinate}
+                        title={marker.title}
+                        description={marker.description}
+          />}
+        </MapView>
         <Box mt={40} alignItems="center">
           <Button
             w={150}

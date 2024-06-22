@@ -7,6 +7,9 @@ import MaskInput from "react-native-mask-input";
 import InputImage from "../../components/FormInputs/InputImage";
 import InputText from "../../components/FormInputs/InputText";
 import { firebase_auth } from "../../components/firebase/firebaseConfig";
+import Toast from "react-native-toast-message";
+import { addDoc, collection } from "@firebase/firestore";
+import { firebase_db } from "../../components/firebase/firebaseConfig";
 
 const SignUpPage = () => {
   const navigation = useNavigation();
@@ -16,7 +19,38 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
+  const inputValues = {
+    nome: nome,
+    phone: phone,
+    email: email,
+    image: image,
+  };
+  
   const auth = firebase_auth;
+
+  const salvarUsuario = async () => {
+    try {
+      const docRef = await addDoc(collection(firebase_db, "usuarios"), inputValues);
+      console.log("Document written with ID: " + docRef.id);
+      const showToast = () => {
+        Toast.show({
+          type: 'success',
+          text1: 'Sucesso',
+          text2: 'Cadastro realizado com sucesso! 🚀'
+        });
+      }
+      showToast();
+      signUp();
+      navigation.navigate("Login");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      Toast.show({
+        type: 'error',
+        text1: 'Erro',
+        text2: 'Erro ao cadastrar usuário! 😢'
+      });
+    }
+  };
 
   const signUp = async () => {
     setLoading(true);
@@ -132,7 +166,7 @@ const SignUpPage = () => {
               marginVertical: 5,
             }}
           >
-            <ButtonText color="white" fontSize={16} fontWeight="600">
+            <ButtonText color="white" fontSize={16} fontWeight="600" onPress={salvarUsuario}>
               Cadastrar
             </ButtonText>
           </Button>
