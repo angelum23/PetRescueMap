@@ -4,8 +4,11 @@ import CardPost from "../../components/Card";
 import React, { useCallback, useState } from "react";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { firebase_db } from "../../components/firebase/firebaseConfig";
-import { FlatList, ActivityIndicator } from "react-native";
+import { FlatList, ActivityIndicator, Dimensions, View } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
+
+
+const {width} = Dimensions.get('window')
 
 const Home = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -40,16 +43,33 @@ const Home = ({ navigation }) => {
       <FlatList
         data={animais}
         keyExtractor={(item) => item.id}
+        showsHorizontalScrollIndicator={true}
+        horizontal
+        snapToOffsets={[...Array(animais.length)].map(
+          (x, i) => i * (width*0.75-20) + (i-1.85)*20
+        )}
+        snapToAlignment={'start'}
+        scrollEventThrottle={16}
+        style={{marginTop: 20}}
+        decelerationRate="fast"
         renderItem={({ item }) => (
-          <CardPost
-            nomeAnimal={item?.nomeAnimal}
-            idade={item?.idade}
-            raca={item?.raca}
-            genero={item?.genero}
-            descricao={item?.descricao}
-            telefone={item?.telefone}
-            imagemValue={item?.imagem}
-          />
+          <View
+            style={{
+              width: width*0.75 - 10,
+              marginHorizontal:5,
+            }}
+          >
+            <CardPost
+              nomeAnimal={item?.nomeAnimal}
+              idade={item?.idade}
+              raca={item?.raca}
+              genero={item?.genero}
+              descricao={item?.descricao}
+              telefone={item?.telefone}
+              imagemValue={item?.imagem}
+            />
+          </View>
+
         )}
       />
       <Fab
