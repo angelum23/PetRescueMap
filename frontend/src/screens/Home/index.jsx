@@ -4,9 +4,10 @@ import CardPost from "../../components/Card";
 import React, { useCallback, useState, useEffect } from "react";
 import { collection, getDocs, query, orderBy, where } from "firebase/firestore"; // Adicionando 'where'
 import { firebase_db } from "../../components/firebase/firebaseConfig";
-import { FlatList, ActivityIndicator, Dimensions, View, ScrollView, Text, Image, StyleSheet } from "react-native";
+import { FlatList, ActivityIndicator, Dimensions, View, ScrollView, Text } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { getAuth } from "firebase/auth"; // Para obter a autenticação do usuário
+import UserCard from "../../components/Card/index2";
 
 const { width } = Dimensions.get('window');
 
@@ -62,23 +63,23 @@ const Home = ({ navigation }) => {
             snapToAlignment={'start'}
             scrollEventThrottle={16}
             decelerationRate="fast"
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <View
                 style={{
-                  height: width / 0.75, // Altura reduzida do card
+                  height: width / 1, // Altura reduzida do card
                   width: width * 0.75 - 10,
                   marginHorizontal: 5,
                 }}
               >
-              <CardPost
-                nomeAnimal={item?.nomeAnimal}
-                idade={item?.idade}
-                raca={item?.raca}
-                genero={item?.genero}
-                descricao={item?.descricao}
-                telefone={item?.telefone}
-                imagemValue={item?.imagem}
-              />
+                <UserCard
+                  nomeAnimal={item?.nomeAnimal}
+                  idade={item?.idade}
+                  raca={item?.raca}
+                  genero={item?.genero}
+                  descricao={item?.descricao}
+                  telefone={item?.telefone}
+                  imagemValue={item?.imagem}
+                />
               </View>
             )}
           />

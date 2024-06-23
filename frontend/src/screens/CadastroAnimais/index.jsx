@@ -71,7 +71,7 @@ const CadastrarAnimais = () => {
 
   const salvarAnimal = async () => {
     try {
-      const userId = getAuth().currentUser?.uid; // Obter o ID do usuário autenticado
+      const userId = getAuth().currentUser?.uid; 
       if (!userId) {
         throw new Error("Usuário não autenticado");
       }
@@ -79,7 +79,7 @@ const CadastrarAnimais = () => {
       const docRef = await addDoc(collection(firebase_db, "animais"), {
         ...inputValues,
         data: serverTimestamp(),
-        userId: userId, // Adicionar userId ao documento
+        userId: userId,
       });
       const showToast = () => {
         Toast.show({
