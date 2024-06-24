@@ -1,15 +1,21 @@
 import { FabIcon } from "@gluestack-ui/themed";
 import { Box, Fab, AddIcon } from "@gluestack-ui/themed";
 import CardPost from "../../components/Card";
-import React, { useCallback, useState, useEffect } from "react";
-import { collection, getDocs, query, orderBy, where } from "firebase/firestore"; // Adicionando 'where'
+import React, { useCallback, useState } from "react";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { firebase_db } from "../../components/firebase/firebaseConfig";
-import { FlatList, ActivityIndicator, Dimensions, View, ScrollView, Text } from "react-native";
+import {
+  FlatList,
+  ActivityIndicator,
+  Dimensions,
+  View,
+  Text,
+} from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { getAuth } from "firebase/auth"; // Para obter a autenticação do usuário
 import UserCard from "../../components/Card/index2";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 const Home = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -17,9 +23,11 @@ const Home = ({ navigation }) => {
   const [animaisUsuario, setAnimaisUsuario] = useState([]);
   const userId = getAuth().currentUser?.uid; // Obter o ID do usuário autenticado
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, [])
+  );
 
   async function fetchData() {
     try {
@@ -46,62 +54,70 @@ const Home = ({ navigation }) => {
     }
   }
 
+  const meusAnimais = () => {
+    return (
+      <Box>
+        <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 1 }}>
+          Meus Companheiros à Espera
+        </Text>
+        <FlatList
+          data={animaisUsuario}
+          keyExtractor={(item) => item.id}
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          snapToOffsets={[...Array(animaisUsuario.length)].map(
+            (x, i) => i * (width * 0.75 - 20) + (i - 1.85) * 20
+          )}
+          snapToAlignment={"start"}
+          scrollEventThrottle={16}
+          decelerationRate="fast"
+          renderItem={({ item, index }) => (
+            <View
+              style={{
+                width: width * 0.75 - 10,
+                marginHorizontal: 5,
+              }}
+            >
+              <UserCard
+                nomeAnimal={item?.nomeAnimal}
+                idade={item?.idade}
+                raca={item?.raca}
+                genero={item?.genero}
+                descricao={item?.descricao}
+                telefone={item?.telefone}
+                imagemValue={item?.imagem}
+              />
+            </View>
+          )}
+        />
+        <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 1 }}>
+          Adote um Amigo
+        </Text>
+      </Box>
+    );
+  };
+
   return (
     <Box flex={1} justifyContent="flex-start" m={10}>
       {loading && <ActivityIndicator size="large" color="#F15156" />}
-      <ScrollView>
-        <Box mb={10}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 2 }}>Meus animais:</Text>
-          <FlatList
-            data={animaisUsuario}
-            keyExtractor={(item) => item.id}
-            showsHorizontalScrollIndicator={true}
-            horizontal
-            snapToOffsets={[...Array(animaisUsuario.length)].map(
-              (x, i) => i * (width * 0.75 - 20) + (i - 1.85) * 20
-            )}
-            snapToAlignment={'start'}
-            scrollEventThrottle={16}
-            decelerationRate="fast"
-            renderItem={({ item, index }) => (
-              <View
-                style={{
-                  height: width / 1, // Altura reduzida do card
-                  width: width * 0.75 - 10,
-                  marginHorizontal: 5,
-                }}
-              >
-                <UserCard
-                  nomeAnimal={item?.nomeAnimal}
-                  idade={item?.idade}
-                  raca={item?.raca}
-                  genero={item?.genero}
-                  descricao={item?.descricao}
-                  telefone={item?.telefone}
-                  imagemValue={item?.imagem}
-                />
-              </View>
-            )}
+      <FlatList
+        data={animais}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
+        style={{ marginTop: 0 }}
+        ListHeaderComponent={meusAnimais}
+        renderItem={({ item }) => (
+          <CardPost
+            nomeAnimal={item?.nomeAnimal}
+            idade={item?.idade}
+            raca={item?.raca}
+            genero={item?.genero}
+            descricao={item?.descricao}
+            telefone={item?.telefone}
+            imagemValue={item?.imagem}
           />
-        </Box>
-        <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 2, marginTop: 20}}>Disponível para adoção:</Text>
-        <FlatList
-          data={animais}
-          keyExtractor={(item) => item.id}
-          style={{ marginTop: 0 }}
-          renderItem={({ item }) => (
-            <CardPost
-              nomeAnimal={item?.nomeAnimal}
-              idade={item?.idade}
-              raca={item?.raca}
-              genero={item?.genero}
-              descricao={item?.descricao}
-              telefone={item?.telefone}
-              imagemValue={item?.imagem}
-            />
-          )}
-        />
-      </ScrollView>
+        )}
+      />
       <Fab
         size="lg"
         bg="#2D384C"

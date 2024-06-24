@@ -17,9 +17,6 @@ const UserCard = ({ nomeAnimal, idade, raca, genero, descricao, imagemValue, tel
       borderRadius={"$lg"} 
       border={1}
     >
-      <Heading mb="$1" size="sm"> 
-        Meus Animaias para adoção!
-      </Heading>
       <Center>
         <Image
           size="lg" 
