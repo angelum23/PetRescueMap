@@ -150,14 +150,14 @@ const Conta = () => {
             inputOnChange={(text) => setEmail(text)}
             w={"100%"}
           />
-          <InputText
+          {/* <InputText
             inputValue={email}
             label={"Senha"}
             value={senha}
             secureTextEntry={true}
             inputOnChange={(text) => setEmail(text)}
             w={"100%"}
-          />
+          /> */}
           <InputImage
             w={"100%"}
             h={300}

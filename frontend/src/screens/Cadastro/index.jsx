@@ -31,7 +31,7 @@ const SignUpPage = () => {
   const salvarUsuario = async () => {
     try {
       setLoading(true);
-      const docRef = await addDoc(collection(firebase_db, "usuarios"), inputValues);
+      await addDoc(collection(firebase_db, "usuarios"), inputValues);
       const showToast = () => {
         Toast.show({
           type: 'success',
@@ -39,8 +39,8 @@ const SignUpPage = () => {
           text2: 'Cadastro realizado com sucesso! 🚀'
         });
       }
+      await signUp();
       showToast();
-      signUp();
       navigation.navigate("Login");
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -58,11 +58,8 @@ const SignUpPage = () => {
     setLoading(true);
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigation.navigate("Login");
     } catch (error) {
       console.log("Sign Up Error:", error.message);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -156,7 +153,7 @@ const SignUpPage = () => {
         </Box>
         <Box flex={1} alignItems="center" mt={20}>
           <Button
-            onPress={signUp}
+            onPress={salvarUsuario}
             alignItems="center"
             justifyContent="center"
             style={{
@@ -168,7 +165,7 @@ const SignUpPage = () => {
               marginVertical: 5,
             }}
           >
-            <ButtonText color="white" fontSize={16} fontWeight="600" onPress={salvarUsuario}>
+            <ButtonText color="white" fontSize={16} fontWeight="600">
               Cadastrar
             </ButtonText>
           </Button>

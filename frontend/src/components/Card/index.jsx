@@ -4,9 +4,10 @@ import {
     Image,
     Text,
     Center,
+    Button,
   } from "@gluestack-ui/themed";
 
-const CardPost = ({ nomeAnimal, idade, raca, genero, descricao, imagemValue, telefone }) => {
+const CardPost = ({ nomeAnimal, idade, raca, genero, descricao, imagemValue, telefone, navigation }) => {
   return (
     <Card
       size="md"
@@ -46,6 +47,17 @@ const CardPost = ({ nomeAnimal, idade, raca, genero, descricao, imagemValue, tel
       <Text mt={10}>
         <Text fontWeight={"$bold"}>Telefone Para Contato: </Text>{telefone}
       </Text>
+      <Button
+        onPress={() => {
+          navigation.navigate("Mapa");
+        }}
+        mt={10}
+        bg="#F15055"
+        size="md"
+        borderRadius="$lg"
+      >
+        <Text color="#FFFFFF">Ver no mapa</Text>
+      </Button>
     </Card>
   );
 };
