@@ -11,7 +11,6 @@ import {
   ScrollView,
   ButtonText,
   ButtonIcon,
-  set,
 } from "@gluestack-ui/themed";
 import InputText from "../../components/FormInputs/InputText";
 import InputImage from "../../components/FormInputs/InputImage";
@@ -19,24 +18,25 @@ import MapView, { Marker } from "react-native-maps";
 import MapHook from "../Mapa/mapHook";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
-import { collection, addDoc, doc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { firebase_db } from "../../components/firebase/firebaseConfig";
 import Toast from "react-native-toast-message";
 import MaskInput from "react-native-mask-input";
 import FormInput from "../../components/FormInputs/FormInput";
+import { getAuth } from "firebase/auth"; // Importando o módulo de autenticação
 
 const CadastrarAnimais = () => {
   const [dadosEdicao, setDadosEdicao] = useState({});
   const [position, setPosition] = useState({});
   const [marker, setMarker] = useState(null);
   const [inputValues, setInputValues] = useState({
-    nomeAnimal: dadosEdicao?.nomeAnimal || null,
-    idade: dadosEdicao?.idade || null,
-    raca: dadosEdicao?.raca || null,
-    genero: dadosEdicao?.genero || null,
-    descricao: dadosEdicao?.descricao || null,
-    telefone: dadosEdicao?.telefone || null,
-    imagem: dadosEdicao?.imagem || null,
+    nomeAnimal: dadosEdicao?.nomeAnimal || "",
+    idade: dadosEdicao?.idade || "",
+    raca: dadosEdicao?.raca || "",
+    genero: dadosEdicao?.genero || "",
+    descricao: dadosEdicao?.descricao || "",
+    telefone: dadosEdicao?.telefone || "",
+    imagem: dadosEdicao?.imagem || "",
   });
 
   const handleChangeInputValues = (fieldName, value) => {
@@ -49,7 +49,6 @@ const CadastrarAnimais = () => {
   const { handleRegionChange, region } = MapHook();
 
   const handleClickMap = (coordinate) => {
-    //todo: Nao ta caindo aqui ao clicar no mapa
     setPosition(coordinate);
     setMarker({
       coordinate: coordinate,
@@ -63,19 +62,25 @@ const CadastrarAnimais = () => {
       nomeAnimal: "",
       idade: "",
       raca: "",
-      genero: null,
+      genero: "",
       descricao: "",
-      telefone: null,
-      imagem: null,
+      telefone: "",
+      imagem: "",
     });
   }
 
   const salvarAnimal = async () => {
     try {
-      const docRef = await addDoc(
-        collection(firebase_db, "animais"),
-        {...inputValues, data: serverTimestamp()}
-      );
+      const userId = getAuth().currentUser?.uid; 
+      if (!userId) {
+        throw new Error("Usuário não autenticado");
+      }
+
+      const docRef = await addDoc(collection(firebase_db, "animais"), {
+        ...inputValues,
+        data: serverTimestamp(),
+        userId: userId,
+      });
       const showToast = () => {
         Toast.show({
           type: "success",
