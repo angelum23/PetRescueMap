@@ -147,7 +147,6 @@ const Conta = () => {
             inputValue={email}
             label={"Email"}
             value={email}
-            inputOnChange={(text) => setEmail(text)}
             w={"100%"}
           />
           {/* <InputText

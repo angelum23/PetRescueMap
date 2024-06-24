@@ -23,6 +23,7 @@ import { firebase_db } from "../../components/firebase/firebaseConfig";
 import Toast from "react-native-toast-message";
 import MaskInput from "react-native-mask-input";
 import FormInput from "../../components/FormInputs/FormInput";
+import { getAuth } from "firebase/auth"; // Importando o módulo de autenticação
 
 const CadastrarAnimais = () => {
   const [dadosEdicao, setDadosEdicao] = useState({});
@@ -64,6 +65,7 @@ const CadastrarAnimais = () => {
       idade: "",
       raca: "",
       genero: "",
+      genero: "",
       descricao: "",
       telefone: "",
       imagem: "",
@@ -74,15 +76,24 @@ const CadastrarAnimais = () => {
 
   const salvarAnimal = async () => {
     try {
-      const docRef = await addDoc(
-        collection(firebase_db, "animais"),
-        { ...inputValues, data: serverTimestamp() }
-      );
-      Toast.show({
-        type: "success",
-        text1: "Sucesso",
-        text2: "Animal cadastrado com sucesso! 🚀",
+      const userId = getAuth().currentUser?.uid; 
+      if (!userId) {
+        throw new Error("Usuário não autenticado");
+      }
+
+      const docRef = await addDoc(collection(firebase_db, "animais"), {
+        ...inputValues,
+        data: serverTimestamp(),
+        userId: userId,
       });
+      const showToast = () => {
+        Toast.show({
+          type: "success",
+          text1: "Sucesso",
+          text2: "Animal cadastrado com sucesso! 🚀",
+        });
+      };
+      showToast();
       resetForm();
       navigation.navigate("Login");
     } catch (e) {

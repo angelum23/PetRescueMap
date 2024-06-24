@@ -4,7 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 import { collection, getDocs } from "firebase/firestore";
 import { firebase_db } from "../../components/firebase/firebaseConfig";
 import MapHook from "../Mapa/mapHook";
-import CardPost from "../../components/Card";
+import CardPost from "../../components/Card/index2";
 import { set } from '@gluestack-style/react';
 
 const { height: screenHeight } = Dimensions.get('window');
@@ -24,7 +24,6 @@ const Mapa = () => {
     const handleClickMarker = (event, petData) => {
         if (fullMap) {
             setFullMap(false);
-            setSelectedPet(petData);
         } else {
             setFullMap(true);
             setSelectedPet(petData);
@@ -74,7 +73,7 @@ const Mapa = () => {
                     />
                 ))}
             </MapView>
-            {fullMap && selectedPet && (
+            {!fullMap && (
                 <ScrollView>
                     <CardPost
                         nomeAnimal={selectedPet?.nomeAnimal}
