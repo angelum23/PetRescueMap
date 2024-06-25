@@ -46,3 +46,6 @@ npm start
 * [Lucas De Castro Zanoni](https://github.com/Castrozan)
 * [Lucas De Oliveira Alano](https://github.com/LucasAlano)
 * [Thiago Dimon Miranda](https://github.com/thiagoDimon)
+
+## Link da Apresentação
+[Apresentação Canva com Vídeos de Utilização do App ](https://www.canva.com/design/DAGJC6D2XOc/GaoyHzXj261WKu3zLsqSoA/view?utm_content=DAGJC6D2XOc&utm_campaign=designshare&utm_medium=link&utm_source=editor#1)
