@@ -1,7 +1,7 @@
-# Pet Rescue Map
+# Pet Rescue Map App
 Projeto final da disciplina de desenvolvimento mobile da universidade Unisatc de Criciúma, Santa Catarina. O aplicativo foi construído com base nas tecnologias e fundamentos aprendidos em sala de aula e experiência prévia dos alunos.
 
-## Qual objetivo do aplicativo
+## Objetivo do aplicativo
 Aplicativo desenvolvido para facilitar a conexão entre pessoas que desejam adotar um animal de estimação e aqueles que precisam encontrar novos lares para seus animais. O principal objetivo, é promover a adoção responsável de animais.
 
 ## Tecnlogias utilizadas
