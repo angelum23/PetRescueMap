@@ -95,7 +95,7 @@ const CadastrarAnimais = ({ navigation }) => {
       };
       showToast();
       resetForm();
-      navigation.navigate("Login");
+      navigation.navigate("Home");
     } catch (e) {
       console.error("Error adding document: ", e);
       Toast.show({
