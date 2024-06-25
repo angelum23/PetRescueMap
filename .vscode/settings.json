@@ -1,3 +1,5 @@
 {
-    "emulator.emulatorPath": "C:\\Users\\Thiago Dimon Miranda\\AppData\\Local\\Android\\Sdk\\emulator"
+    "emulator.emulatorPath": "C:\\Users\\Thiago Dimon Miranda\\AppData\\Local\\Android\\Sdk\\emulator",
+    "atlascode.bitbucket.enabled": false,
+    "atlascode.jira.enabled": false
 }

@@ -24,6 +24,7 @@ const Mapa = () => {
     const handleClickMarker = (event, petData) => {
         if (fullMap) {
             setFullMap(false);
+            setSelectedPet(petData);
         } else {
             setFullMap(true);
             setSelectedPet(petData);
@@ -62,7 +63,7 @@ const Mapa = () => {
 
     return (
         <ScrollView flex={1}>
-            <MapView style={{ height: mapHeight }} region={region} onRegionChangeComplete={handleRegionChange}>
+            <MapView style={{ height: mapHeight }} region={region} onRegionChangeComplete={handleRegionChange} onPress={(e) => handleClickMarker(e, null)}>
                 {markers.map((marker, index) => (
                     <Marker
                         key={index}

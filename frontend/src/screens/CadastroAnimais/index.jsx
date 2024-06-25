@@ -25,7 +25,7 @@ import MaskInput from "react-native-mask-input";
 import FormInput from "../../components/FormInputs/FormInput";
 import { getAuth } from "firebase/auth"; // Importando o módulo de autenticação
 
-const CadastrarAnimais = () => {
+const CadastrarAnimais = ({ navigation }) => {
   const [dadosEdicao, setDadosEdicao] = useState({});
   const [position, setPosition] = useState({});
   const [marker, setMarker] = useState(null);
